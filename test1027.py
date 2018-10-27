@@ -64,7 +64,7 @@ class Vgg16:
             red - self.vgg_mean[2],
         ])
 #这里我们都是再用vgg16.npy中的参数来进行前面部分的训练和预测 
-     conv1_1 = self.conv_layer(bgr, "conv1_1")
+        conv1_1 = self.conv_layer(bgr, "conv1_1")
         conv1_2 = self.conv_layer(conv1_1, "conv1_2")
         pool1 = self.max_pool(conv1_2, 'pool1')
 
