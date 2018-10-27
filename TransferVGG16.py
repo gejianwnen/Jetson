@@ -54,8 +54,7 @@ class Vgg16:
 
         self.tfx = tf.placeholder(tf.float32, [None, 224, 224, 3])
         self.tfy = tf.placeholder(tf.float32, [None, 1])
-
-        red, green, blue = tf.split(axis=3, num_or_size_splits=3, value=self.tfx * 255.0）
+        red, green, blue = tf.split(axis=3, num_or_size_splits=3, value=self.tfx * 255.0)
 #这里需要将图片的rgb格式转化为bgr格式。
 
         bgr = tf.concat(axis=3, values=[
@@ -116,16 +115,15 @@ class Vgg16:
         return loss
 #类中预测函数
     def predict(self,paths):
-     
         fig, axs = plt.subplots(1, 2)
         for i, path in enumerate(paths):
             x = load_img(path)
             length = self.sess.run(self.out, {self.tfx: x})
             axs[i].imshow(x[0])
             if length<80:
-            animal_ = 'This is a cute cat!'
+                animal_ = 'This is a cute cat!'
             else:
-            animal_ = 'This is a fucking tiger!'
+                animal_ = 'This is a fucking tiger!'
             axs[i].set_title(animal_+' body length: %.1f cm'% length)
             axs[i].set_xticks(()); axs[i].set_yticks(())
         plt.show()
