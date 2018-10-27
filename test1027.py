@@ -13,9 +13,10 @@ def load_img(path):
     img = skimage.io.imread(path)
     img = img / 255.0
     short_edge = min(img.shape[:2])
+    # print(short_edge)
     yy = int((img.shape[0] - short_edge) / 2)
     xx = int((img.shape[1] - short_edge) / 2)
-    crop_img = img[yy: yy + short_edge, xx: xx + short_edge]
+    crop_img = img[yy: yy + short_edge, xx: xx + short_edge] #剪裁图片
     resized_img = skimage.transform.resize(crop_img, (224, 224))[None, :, :, :]     # shape [1, 224, 224, 3]
     return resized_img
 
@@ -36,6 +37,7 @@ def load_data():
             if len(imgs[k]) == 400:     
                 break
         print('***',k, len(imgs[k]))
+    # 产生随机的y
     tigers_y = np.maximum(36, np.random.randn(len(imgs['tiger']), 1) * 32 +180)
     cat_y = np.maximum(10, np.random.randn(len(imgs['cat']), 1) * 8 + 40)
     return imgs['tiger'], imgs['cat'], tigers_y, cat_y
